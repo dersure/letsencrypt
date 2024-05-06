@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+    certbot:
+        container_name: letsencrypt
+        build:
+            context: ./certbot
+        volumes:
+            - ./.data/certbot/certs/:/var/certs
+            - ./certbot/letsencrypt/:/var/www/letsencrypt
+        environment:
+            - CN=${CN:-fake.domain.com}
+            - EMAIL=${EMAIL:-fake.email@gmail.com}
